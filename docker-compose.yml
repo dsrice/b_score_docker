@@ -1,0 +1,31 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: mebee
+      POSTGRES_PASSWORD: password
+      PGPASSWORD: password123
+      POSTGRES_DB: sample
+      TZ: "Asia/Tokyo"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./db:/var/lib/postgresql/data"
+
+  web:
+    build: ./contents/webapp
+    container_name: base-web
+    restart: always
+    ports:
+      - "8000:8000"
+    command: sh -c "sleep 5; python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - "../b_score_webapp :/base-webapp"
+      - "./contents/db :/code"
+    depends_on:
+      - db
+    tty: true
+
