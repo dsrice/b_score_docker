@@ -1,6 +1,0 @@
-Django
-psycopg2
-djangorestframework
-django-filter
-mysqlclient
-djangorestframework-jwt
