@@ -5,15 +5,16 @@ services:
     container_name: db
     restart: always
     environment:
-      POSTGRES_USER: mebee
-      POSTGRES_PASSWORD: password
-      PGPASSWORD: password123
-      POSTGRES_DB: sample
+      POSTGRES_USER: bscore
+      POSTGRES_PASSWORD: bscore2812
+      PGPASSWORD: bscore2812
+      POSTGRES_DB: bscore
       TZ: "Asia/Tokyo"
     ports:
       - "5432:5432"
     volumes:
-      - "./db:/var/lib/postgresql/data"
+      - ./postgres:/var/lib/postgresql
+      - ./postgres-init:/docker-entrypoint-initdb.d
 
   web:
     build: ../b_score_webapp
